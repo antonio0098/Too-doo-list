@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<!--
+Created using JS Bin
+http://jsbin.com
+
+Copyright (c) 2016 by anonymous (http://jsbin.com/povazenovi/1/edit)
+
+Released under the MIT license: http://jsbin.mit-license.org
+-->
+<meta name="robots" content="noindex">
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <title>JS Bin</title>
+<style type="text/css" >
+body {
+	margin: 0 auto;
+	padding: 10px;
+	color: black;
+	background-color: rgba(255, 255, 255, 0.5);
+	background-image: url("pozadina.jpg");
+	font-family: calibri;
+}
+
+.logo  {
+	background-image: url("logo.png") ;
+	height: 150px;
+	width: 263px;
+	margin-left: 462px;
+}
+
+
+#tablica ,th ,td {
+	color: white;
+	 border: 2px solid orange;
+	 border-collapse: collapse;
+	
+}
+
+#tablica {
+	font-family: Arial;
+	margin-left:440px;
+	width: 354px;
+	height: 98px;	
+	border: 2px solid yellow;
+}
+
+
+.add  {
+  	margin-left: 440px;
+  	border: 2px solid black;
+	width: 354px;
+	height: 50px;
+	border: 2px solid black;
+	background-color: rbga(255, 255, 255, 1);	
+
+}
+
+.prostor placeholder {
+	color: black;
+	font-family: calibri;
+}
+.prostor {
+	width: 347px;
+	margin-left:440px;
+	border: 2px solid black;
+	color: black;
+}
+
+
+
+.delete {
+	background-color: red;
+}
+
+.edit {
+	background-color: blue;
+}
+
+</style>
+</head>
+<body>
+<div class="logo">  </div>
+  <textarea class="prostor" cols="40" rows="4"  placeholder="to doo list" ></textarea> 
+<button class="add"> Add to list </button>
+
+
+
+<table cellpadding="3" border="2 px" id="tablica">
+<tr>
+<th> Naziv </th>
+<th colspan="3"> Akcija </th>
+<th colspan="3"> Kolicina </th>
+</tr>
+<tr class="all">
+<td class="uradi"> Uradi zadacu </td>
+<td button class="ceck"><button> done </button></td>
+<td button class="delete"><button> delete </button></td>
+<td button class="edit"><button> edit </button></td>
+<td button class="dodaj"><button> + </button></td>
+<td button class="manje"><button> - </button></td>
+<td class="pocetna"> 0 </td>
+</tr>
+</table>
+																						
+<script>
+$(document).ready(function(){
+$(".add").click(function(){
+ $("#tablica").append("<tr class='all'>"+"<td class='uradi'>" + $(".prostor").val() + "</td>"+"<td class='ceck'>" + "Done" + "</td>"+"</td>"+"<td class='delete'>" + "Delete" + "</td>"+"</td>"+"<td class='edit'>" + "Edit" + "</td>"+"<td class='dodaj'>" + "+" + "</td>" +"<td class='manje'>" + "-" + "</td>"+"<td class='pocetna'>" + "0" + "</td>"+"</tr>");
+ 
+	});
+
+  });
+
+
+	$(document).on("click", ".ceck", function(){
+	$(this).parent().css("background-color", "green");
+});
+
+
+
+
+$(document).on("click" , ".delete", function(){
+	$(this).parent().hide();
+});
+
+
+
+$("#tablica").on("click", ".edit", function(){
+        $(this).closest('tr').find(".uradi").empty();
+		$(this).closest('tr').find(".uradi").append( $(".prostor").val() );
+    });
+
+
+$("#tablica").on("click", ".dodaj",function() {
+  var n = parseInt($(this).closest('tr').find(".pocetna").html());
+  if(n<20) {
+  $(this).closest('tr').find(".pocetna").html(++n);
+	}
+});
+
+
+
+$("#tablica").on("click", ".manje",function() {
+  var n = parseInt($(this).closest('tr').find(".pocetna").html());
+  if(n>0) {
+  $(this).closest('tr').find(".pocetna").html(--n);
+	}
+});
+
+
+		
+</script>
+</body>
+</html>
